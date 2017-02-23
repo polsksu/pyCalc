@@ -94,10 +94,11 @@ class pyCalc:
         Func that clear all panels
         Функция, очищающая панели
     '''
-    def deleteAll(self):
+    def deleteAll(self, arg):
         self.primaryArea.delete(0,'end')
         self.primaryArea.insert(0,'0')
-        self.secondaryAreaVar.set('')
+        if arg == 'C':
+           self.secondaryAreaVar.set('')
 
     '''
         Func that input point for float number
@@ -155,13 +156,14 @@ class pyCalc:
             Button generation 
             Генерация кнопок
         '''
-        tk.Button(master,text='=',font='sans-serif 16',width=4,justify='center',command=lambda:self.equalsAndActions()).grid(row=2,column=2,columnspan=2,sticky='wens')
+        tk.Button(master,text='=',font='sans-serif 16',width=4,justify='center',command=lambda:self.equalsAndActions()).grid(row=2,column=3,sticky='wens')
         tk.Button(master,text='+',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('+')).grid(row=3,column=3,sticky='wens')
         tk.Button(master,text='-',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('-')).grid(row=4,column=3,sticky='wens')
         tk.Button(master,text='*',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('*')).grid(row=5,column=3,sticky='wens')
         tk.Button(master,text='/',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('/')).grid(row=6,column=3,sticky='wens')
         tk.Button(master,text='←',font='sans-serif 16',width=2,justify='center',command=lambda:self.delete1()).grid(row=2,column=0,sticky='wens')
-        tk.Button(master,text='C',font='sans-serif 16',width=2,justify='center',command=lambda:self.deleteAll()).grid(row=2,column=1,sticky='wens')
+        tk.Button(master,text='C',font='sans-serif 16',width=2,justify='center',command=lambda:self.deleteAll('C')).grid(row=2,column=1,sticky='wens')
+        tk.Button(master,text='CE',font='sans-serif 16',width=2,justify='center',command=lambda:self.deleteAll('CE')).grid(row=2,column=2,sticky='wens')
         tk.Button(master,text='0',font='sans-serif 16',width=4,justify='center',command=lambda:self.numkey('0')).grid(row=6,column=0,columnspan=2,sticky='wens')
         tk.Button(master,text='1',font='sans-serif 16',width=2,justify='center',command=lambda:self.numkey('1')).grid(row=5,column=0,sticky='wens')
         tk.Button(master,text='2',font='sans-serif 16',width=2,justify='center',command=lambda:self.numkey('2')).grid(row=5,column=1,sticky='wens')
