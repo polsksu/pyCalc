@@ -2,10 +2,8 @@
 #-*-coding: utf-8-*-
 
 '''
-    This is a little text about OOP. So, I can't do it!
-    Маленькое предисловие, я никогда до этого не программировал 
-    объектно-ориентированно, поэтому контролируйте свои тряпки,
-    летящие в меня.
+    The latest version is always on the
+    https://github.com/polsksu/pyCalc
 '''
 
 import tkinter as tk
