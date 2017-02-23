@@ -156,7 +156,7 @@ class pyCalc:
             Button generation 
             Генерация кнопок
         '''
-        tk.Button(master,text='=',font='sans-serif 16',width=4,justify='center',command=lambda:self.equalsAndActions()).grid(row=2,column=3,sticky='wens')
+        tk.Button(master,text='=',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions()).grid(row=2,column=3,sticky='wens')
         tk.Button(master,text='+',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('+')).grid(row=3,column=3,sticky='wens')
         tk.Button(master,text='-',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('-')).grid(row=4,column=3,sticky='wens')
         tk.Button(master,text='*',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('*')).grid(row=5,column=3,sticky='wens')
