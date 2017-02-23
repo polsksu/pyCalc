@@ -31,7 +31,7 @@ class pyCalc:
                             result = str(float(self.secondaryAreaVar.get()[:-2]) / float(self.primaryArea.get()))
 
                         self.secondaryAreaVar.set('')
-                        self.primaryArea.delete([-1],'end')
+                        self.primaryArea.delete(0,'end')
                         self.primaryArea.insert(0,result)
                     else:
                         if sigh == '+':
@@ -43,7 +43,7 @@ class pyCalc:
                         elif sigh == '/':
                             self.secondaryAreaVar.set(str(float(self.secondaryAreaVar.get()[:-2]) / float(self.primaryArea.get())))
                         self.secondaryAreaVar.set(self.secondaryAreaVar.get() + ' ' + sigh)
-                        self.primaryArea.delete([-1],'end')
+                        self.primaryArea.delete(0,'end')
                         self.primaryArea.insert(0,'0')
 
                 else:
@@ -57,7 +57,7 @@ class pyCalc:
                         elif self.secondaryAreaVar.get()[-1] == '/':
                             result = str(int(self.secondaryAreaVar.get()[:-2]) / int(self.primaryArea.get()))
                         self.secondaryAreaVar.set('')
-                        self.primaryArea.delete([-1],'end')
+                        self.primaryArea.delete(0,'end')
                         self.primaryArea.insert(0,result)
                     else:
                         if sigh == '+':
@@ -69,16 +69,16 @@ class pyCalc:
                         elif sigh == '/':
                             self.secondaryAreaVar.set(str(int(self.secondaryAreaVar.get()[:-2]) / int(self.primaryArea.get())))
                         self.secondaryAreaVar.set(self.secondaryAreaVar.get() + ' ' + sigh)
-                        self.primaryArea.delete([-1],'end')
+                        self.primaryArea.delete(0,'end')
                         self.primaryArea.insert(0,'0')
             else:
                 if sigh != '':
                     self.secondaryAreaVar.set(self.primaryArea.get() + ' ' + sigh)
-                    self.primaryArea.delete([-1],'end')
+                    self.primaryArea.delete(0,'end')
                     self.primaryArea.insert(0,'0')
         except Exception:
             self.secondaryAreaVar.set('')
-            self.primaryArea.delete([-1],'end')
+            self.primaryArea.delete(0,'end')
             self.primaryArea.insert(0,'An error was occured')
 
     '''
@@ -95,7 +95,7 @@ class pyCalc:
         Функция, очищающая панели
     '''
     def deleteAll(self):
-        self.primaryArea.delete([-1],'end')
+        self.primaryArea.delete(0,'end')
         self.primaryArea.insert(0,'0')
         self.secondaryAreaVar.set('')
 
@@ -113,7 +113,7 @@ class pyCalc:
     '''
     def numkey(self, number):
         if self.primaryArea.get() == '0':
-            self.primaryArea.delete([-1],'end')
+            self.primaryArea.delete(0,'end')
         self.primaryArea.insert('end',number)
 
     ''' 
