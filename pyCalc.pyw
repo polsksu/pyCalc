@@ -148,7 +148,7 @@ class pyCalc:
             Генерация панели предыдущих вычислений
         '''
         self.secondaryAreaVar = tk.StringVar()
-        self.secondaryArea = tk.Label(master,anchor='e',font='sans-serif 8',bg='white',fg='#686868',textvariable=self.secondaryAreaVar)
+        self.secondaryArea = tk.Label(master,anchor='e',font='sans-serif 8',bg='white',fg='#686868',width=20,textvariable=self.secondaryAreaVar)
         self.secondaryArea.grid(row=0,column=0,columnspan=4,sticky='wens')
 
         ''' 
