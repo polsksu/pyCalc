@@ -3,12 +3,19 @@
 
 '''
     This is a little text about OOP. So, I can't do it!
+    Маленькое предисловие, я никогда до этого не программировал 
+    объектно-ориентированно, поэтому контролируйте свои тряпки,
+    летящие в меня.
 '''
 
 import tkinter as tk
 
 class pyCalc:
-    
+
+    '''
+        Func that include equal and arithmetic buttons
+        Функция, включающая в себя кнопки равно и арифметических действий
+    '''
     def equalsAndActions(self,sigh=''):
         try:
             if self.secondaryAreaVar.get() != '':
@@ -74,36 +81,72 @@ class pyCalc:
             self.primaryArea.delete([-1],'end')
             self.primaryArea.insert(0,'An error was occured')
 
-
+    '''
+        Func that clear input panel by numeric
+        Функция, очищающая панель ввода по символу
+    '''
     def delete1(self):
         self.primaryArea.delete(len(self.primaryArea.get()) - 1)
         if self.primaryArea.get() == '':
             self.primaryArea.insert(0,'0')
 
+    '''
+        Func that clear all panels
+        Функция, очищающая панели
+    '''
     def deleteAll(self):
         self.primaryArea.delete([-1],'end')
         self.primaryArea.insert(0,'0')
         self.secondaryAreaVar.set('')
 
+    '''
+        Func that input point for float number
+        Функция, которая вводит точку для числа с плавающей точкой(!)
+    '''
     def point(self):
         if not '.' in self.primaryArea.get():
             self.primaryArea.insert('end','.')
 
+    '''
+        Func that input numeric in the input panel
+        Функция, которая вводит цифру в панель ввода
+    '''
     def numkey(self, number):
         if self.primaryArea.get() == '0':
             self.primaryArea.delete([-1],'end')
         self.primaryArea.insert('end',number)
 
+    ''' 
+        Primary func
+        Основная функция
+    '''
     def __init__(self, master):
         super(pyCalc, self).__init__()
 
+        '''
+            Change of standart "tk" window title
+            Замена заголовка окна
+        '''
         master.title('pyCalc')
+
+        '''
+            Ban of change the window's size
+            Запрет на изменение размера окна
+        '''
         master.resizable(width=False, height=False)
 
+        '''
+            Generation of input panel
+            Генерация панели ввода
+        '''
         self.primaryArea = tk.Entry(master,justify='right',relief='flat',font='sans-serif 12',width=20)
         self.primaryArea.grid(row=1,column=0,columnspan=4,sticky='wens')
         self.primaryArea.insert(0,'0')
 
+        ''' 
+            Generation of panel with previous calculate
+            Генерация панели предыдущих вычислений
+        '''
         self.secondaryAreaVar = tk.StringVar()
         self.secondaryArea = tk.Label(master,anchor='e',font='sans-serif 8',bg='white',fg='#686868',textvariable=self.secondaryAreaVar)
         self.secondaryArea.grid(row=0,column=0,columnspan=4,sticky='wens')
@@ -132,6 +175,7 @@ class pyCalc:
         tk.Button(master,text='.',font='sans-serif 16',width=2,justify='center',command=lambda:self.point()).grid(row=6,column=2,sticky='wens')
 
 if __name__ == '__main__':
-    root = tk.Tk()
-    app = pyCalc(root)
-    root.mainloop()
+    root = tk.Tk()       
+    app = pyCalc(root)   # Object initialization
+                         # Инициализация объекта
+    root.mainloop()      
