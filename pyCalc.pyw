@@ -97,6 +97,8 @@ class pyCalc:
 	def __init__(self, master):
 		super(pyCalc, self).__init__()
 
+		master.title('pyCalc')
+		master.resizable(width=False, height=False)
 
 		self.primaryArea = tk.Entry(master,justify='right',relief='flat',font='sans-serif 12',width=20)
 		self.primaryArea.grid(row=1,column=0,columnspan=4,sticky='wens')
@@ -131,7 +133,5 @@ class pyCalc:
 
 if __name__ == '__main__':
 	root = tk.Tk()
-	root.title('pyCalc')
-	root.resizable(width=False, height=False)
 	app = pyCalc(root)
 	root.mainloop()
