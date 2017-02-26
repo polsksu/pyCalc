@@ -10,7 +10,7 @@ from sys import version_info
 
 if version_info.major == 2:
     import Tkinter as tk
-elif version_info.major ==3:
+elif version_info.major == 3:
     import tkinter as tk
 
 class pyCalc:
