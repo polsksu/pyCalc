@@ -6,7 +6,12 @@
     https://github.com/polsksu/pyCalc
 '''
 
-import tkinter as tk
+from sys import version_info
+
+if version_info.major == 2:
+    import Tkinter as tk
+elif version_info.major ==3:
+    import tkinter as tk
 
 class pyCalc:
 
@@ -120,7 +125,6 @@ class pyCalc:
         Основная функция
     '''
     def __init__(self, master):
-        super(pyCalc, self).__init__()
 
         '''
             Change of standart "tk" window title
