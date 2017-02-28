@@ -6,14 +6,28 @@
     https://github.com/polsksu/pyCalc
 '''
 
+'''
+    Imports of libs
+    Импорт библиотек
+'''
 from sys import version_info
-
+import decimal as dec
 if version_info.major == 2:
     import Tkinter as tk
 elif version_info.major == 3:
     import tkinter as tk
 
+'''
+    Main part
+    Основной код
+'''
 class pyCalc:
+
+    '''
+        Count of numerals atfer point
+        Кол-во знаков после запятой
+    '''
+    dec.getcontext().prec = 16
 
     '''
         Func that include equal and arithmetic buttons
@@ -25,26 +39,26 @@ class pyCalc:
                 if (self.primaryArea.get()).find('.') != -1 or (self.secondaryAreaVar.get()).find('.') != -1:
                     if sigh == '':
                         if self.secondaryAreaVar.get()[-1] == '+':
-                            result = str(float(self.secondaryAreaVar.get()[:-2]) + float(self.primaryArea.get()))
+                            result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) + dec.Decimal(self.primaryArea.get()))
                         elif self.secondaryAreaVar.get()[-1] == '-':
-                            result = str(float(self.secondaryAreaVar.get()[:-2]) - float(self.primaryArea.get()))
+                            result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) - dec.Decimal(self.primaryArea.get()))
                         elif self.secondaryAreaVar.get()[-1] == '*':
-                            result = str(float(self.secondaryAreaVar.get()[:-2]) * float(self.primaryArea.get()))
+                            result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) * dec.Decimal(self.primaryArea.get()))
                         elif self.secondaryAreaVar.get()[-1] == '/':
-                            result = str(float(self.secondaryAreaVar.get()[:-2]) / float(self.primaryArea.get()))
+                            result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) / dec.Decimal(self.primaryArea.get()))
 
                         self.secondaryAreaVar.set('')
                         self.primaryArea.delete(0,'end')
                         self.primaryArea.insert(0,result)
                     else:
                         if sigh == '+':
-                            self.secondaryAreaVar.set(str(float(self.secondaryAreaVar.get()[:-2]) + float(self.primaryArea.get())))
+                            self.secondaryAreaVar.set(str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) + dec.Decimal(self.primaryArea.get())))
                         elif sigh == '-':
-                            self.secondaryAreaVar.set(str(float(self.secondaryAreaVar.get()[:-2]) - float(self.primaryArea.get())))
+                            self.secondaryAreaVar.set(str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) - dec.Decimal(self.primaryArea.get())))
                         elif sigh == '*':
-                            self.secondaryAreaVar.set(str(float(self.secondaryAreaVar.get()[:-2]) * float(self.primaryArea.get())))
+                            self.secondaryAreaVar.set(str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) * dec.Decimal(self.primaryArea.get())))
                         elif sigh == '/':
-                            self.secondaryAreaVar.set(str(float(self.secondaryAreaVar.get()[:-2]) / float(self.primaryArea.get())))
+                            self.secondaryAreaVar.set(str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) / dec.Decimal(self.primaryArea.get())))
                         self.secondaryAreaVar.set(self.secondaryAreaVar.get() + ' ' + sigh)
                         self.primaryArea.delete(0,'end')
                         self.primaryArea.insert(0,'0')
@@ -82,7 +96,7 @@ class pyCalc:
         except Exception:
             self.secondaryAreaVar.set('')
             self.primaryArea.delete(0,'end')
-            self.primaryArea.insert(0,'An error was occured')
+            self.primaryArea.insert(0,'An error was occured!0)')
 
     '''
         Func that clear input panel by numeric
@@ -104,7 +118,7 @@ class pyCalc:
            self.secondaryAreaVar.set('')
 
     '''
-        Func that input point for float number
+        Func that input point for dec.Decimal number
         Функция, которая вводит точку для числа с плавающей точкой(!)
     '''
     def point(self):
