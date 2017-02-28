@@ -118,7 +118,7 @@ class pyCalc:
            self.secondaryAreaVar.set('')
 
     '''
-        Func that input point for dec.Decimal number
+        Func that input point for float number
         Функция, которая вводит точку для числа с плавающей точкой(!)
     '''
     def point(self):
