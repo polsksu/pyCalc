@@ -1,6 +1,29 @@
 #!/usr/bin/python3
 #-*-coding: utf-8-*-
+'''
+MIT License
 
+Copyright (c) 2018 Susliakov Vitalii Vladimirovich
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+'''
 '''
     The latest version is always on the
     https://github.com/polsksu/pyCalc
@@ -33,24 +56,21 @@ class pyCalc:
         Func that include equal and arithmetic buttons
         Функция, включающая в себя кнопки равно и арифметических действий
     '''
-    def equalsAndActions(self,sigh=''):
+    def arithmetic(self,sigh=''):
         try:
             if self.secondaryAreaVar.get() != '':
-                if (self.primaryArea.get()).find('.') != -1 or (self.secondaryAreaVar.get()).find('.') != -1:
-                    if sigh == '':
-                        if self.secondaryAreaVar.get()[-1] == '+':
-                            result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) + dec.Decimal(self.primaryArea.get()))
-                        elif self.secondaryAreaVar.get()[-1] == '-':
-                            result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) - dec.Decimal(self.primaryArea.get()))
-                        elif self.secondaryAreaVar.get()[-1] == '*':
-                            result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) * dec.Decimal(self.primaryArea.get()))
-                        elif self.secondaryAreaVar.get()[-1] == '/':
-                            result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) / dec.Decimal(self.primaryArea.get()))
+                if sigh != self.secondaryAreaVar.get()[-1]:
+                    if self.secondaryAreaVar.get()[-1] == '+':
+                        self.arithmetic('+')
+                    elif self.secondaryAreaVar.get()[-1] == '-':
+                        self.arithmetic('-')
+                    elif self.secondaryAreaVar.get()[-1] == '*':
+                        self.arithmetic('*')
+                    elif self.secondaryAreaVar.get()[-1] == '/':
+                        self.arithmetic('/')
 
-                        self.secondaryAreaVar.set('')
-                        self.primaryArea.delete(0,'end')
-                        self.primaryArea.insert(0,result)
-                    else:
+                if (self.primaryArea.get()).find('.') != -1 or (self.secondaryAreaVar.get()).find('.') != -1:
+                    if self.primaryArea.get() != '0':
                         if sigh == '+':
                             self.secondaryAreaVar.set(str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) + dec.Decimal(self.primaryArea.get())))
                         elif sigh == '-':
@@ -59,24 +79,15 @@ class pyCalc:
                             self.secondaryAreaVar.set(str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) * dec.Decimal(self.primaryArea.get())))
                         elif sigh == '/':
                             self.secondaryAreaVar.set(str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) / dec.Decimal(self.primaryArea.get())))
-                        self.secondaryAreaVar.set(self.secondaryAreaVar.get() + ' ' + sigh)
-                        self.primaryArea.delete(0,'end')
-                        self.primaryArea.insert(0,'0')
+                    else:
+                        self.secondaryAreaVar.set(self.secondaryAreaVar.get()[:-2])
+
+                    self.secondaryAreaVar.set(self.secondaryAreaVar.get() + ' ' + sigh)
+                    self.primaryArea.delete(0,'end')
+                    self.primaryArea.insert(0,'0')
 
                 else:
-                    if sigh == '':
-                        if self.secondaryAreaVar.get()[-1] == '+':
-                            result = str(int(self.secondaryAreaVar.get()[:-2]) + int(self.primaryArea.get()))
-                        elif self.secondaryAreaVar.get()[-1] == '-':
-                            result = str(int(self.secondaryAreaVar.get()[:-2]) - int(self.primaryArea.get()))
-                        elif self.secondaryAreaVar.get()[-1] == '*':
-                            result = str(int(self.secondaryAreaVar.get()[:-2]) * int(self.primaryArea.get()))
-                        elif self.secondaryAreaVar.get()[-1] == '/':
-                            result = str(int(self.secondaryAreaVar.get()[:-2]) / int(self.primaryArea.get()))
-                        self.secondaryAreaVar.set('')
-                        self.primaryArea.delete(0,'end')
-                        self.primaryArea.insert(0,result)
-                    else:
+                    if self.primaryArea.get() != '0':
                         if sigh == '+':
                             self.secondaryAreaVar.set(str(int(self.secondaryAreaVar.get()[:-2]) + int(self.primaryArea.get())))
                         elif sigh == '-':
@@ -85,18 +96,58 @@ class pyCalc:
                             self.secondaryAreaVar.set(str(int(self.secondaryAreaVar.get()[:-2]) * int(self.primaryArea.get())))
                         elif sigh == '/':
                             self.secondaryAreaVar.set(str(int(self.secondaryAreaVar.get()[:-2]) / int(self.primaryArea.get())))
-                        self.secondaryAreaVar.set(self.secondaryAreaVar.get() + ' ' + sigh)
-                        self.primaryArea.delete(0,'end')
-                        self.primaryArea.insert(0,'0')
-            else:
-                if sigh != '':
-                    self.secondaryAreaVar.set(self.primaryArea.get() + ' ' + sigh)
+                    else:
+                        self.secondaryAreaVar.set(self.secondaryAreaVar.get()[:-2])
+                    self.secondaryAreaVar.set(self.secondaryAreaVar.get() + ' ' + sigh)
                     self.primaryArea.delete(0,'end')
                     self.primaryArea.insert(0,'0')
+            else:
+                self.secondaryAreaVar.set(self.primaryArea.get() + ' ' + sigh)
+                self.primaryArea.delete(0,'end')
+                self.primaryArea.insert(0,'0')
         except Exception:
             self.secondaryAreaVar.set('')
             self.primaryArea.delete(0,'end')
-            self.primaryArea.insert(0,'An error was occured!0)')
+            self.primaryArea.insert(0,'An error was occured!')
+
+    def equals(self):
+        try:
+            if (self.primaryArea.get()).find('.') != -1 or (self.secondaryAreaVar.get()).find('.') != -1:
+
+                if self.secondaryAreaVar.get() != '':
+                    if self.secondaryAreaVar.get()[-1] == '+':
+                        result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) + dec.Decimal(self.primaryArea.get()))
+                    elif self.secondaryAreaVar.get()[-1] == '-':
+                        result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) - dec.Decimal(self.primaryArea.get()))
+                    elif self.secondaryAreaVar.get()[-1] == '*':
+                        result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) * dec.Decimal(self.primaryArea.get()))
+                    elif self.secondaryAreaVar.get()[-1] == '/':
+                        result = str(dec.Decimal(self.secondaryAreaVar.get()[:-2]) / dec.Decimal(self.primaryArea.get()))
+
+                    self.secondaryAreaVar.set('')
+                    self.primaryArea.delete(0,'end')
+                    self.primaryArea.insert(0,result)
+
+            else:
+
+                if self.secondaryAreaVar.get() != '':
+                    if self.secondaryAreaVar.get()[-1] == '+':
+                        result = str(int(self.secondaryAreaVar.get()[:-2]) + int(self.primaryArea.get()))
+                    elif self.secondaryAreaVar.get()[-1] == '-':
+                        result = str(int(self.secondaryAreaVar.get()[:-2]) - int(self.primaryArea.get()))
+                    elif self.secondaryAreaVar.get()[-1] == '*':
+                        result = str(int(self.secondaryAreaVar.get()[:-2]) * int(self.primaryArea.get()))
+                    elif self.secondaryAreaVar.get()[-1] == '/':
+                        result = str(int(self.secondaryAreaVar.get()[:-2]) / int(self.primaryArea.get()))
+
+                    self.secondaryAreaVar.set('')
+                    self.primaryArea.delete(0,'end')
+                    self.primaryArea.insert(0,result)
+        except Exception:
+            self.secondaryAreaVar.set('')
+            self.primaryArea.delete(0,'end')
+            self.primaryArea.insert(0,'An error was occured!')
+
 
     '''
         Func that clear input panel by numeric
@@ -168,15 +219,19 @@ class pyCalc:
         self.secondaryArea = tk.Label(master,anchor='e',font='sans-serif 8',bg='white',fg='#686868',width=20,textvariable=self.secondaryAreaVar)
         self.secondaryArea.grid(row=0,column=0,columnspan=4,sticky='wens')
 
+        self.debugAreaVar = tk.StringVar()
+        self.debugArea = tk.Label(master,anchor='e',font='sans-serif 8',bg='white',fg='#686868',width=20,textvariable=self.debugAreaVar)
+        self.debugArea.grid(row=7,column=0,columnspan=4,sticky='wens')   
+
         ''' 
             Button generation 
             Генерация кнопок
         '''
-        tk.Button(master,text='=',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions()).grid(row=2,column=3,sticky='wens')
-        tk.Button(master,text='+',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('+')).grid(row=3,column=3,sticky='wens')
-        tk.Button(master,text='-',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('-')).grid(row=4,column=3,sticky='wens')
-        tk.Button(master,text='*',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('*')).grid(row=5,column=3,sticky='wens')
-        tk.Button(master,text='/',font='sans-serif 16',width=2,justify='center',command=lambda:self.equalsAndActions('/')).grid(row=6,column=3,sticky='wens')
+        tk.Button(master,text='=',font='sans-serif 16',width=2,justify='center',command=lambda:self.equals()).grid(row=2,column=3,sticky='wens')
+        tk.Button(master,text='+',font='sans-serif 16',width=2,justify='center',command=lambda:self.arithmetic('+')).grid(row=3,column=3,sticky='wens')
+        tk.Button(master,text='-',font='sans-serif 16',width=2,justify='center',command=lambda:self.arithmetic('-')).grid(row=4,column=3,sticky='wens')
+        tk.Button(master,text='*',font='sans-serif 16',width=2,justify='center',command=lambda:self.arithmetic('*')).grid(row=5,column=3,sticky='wens')
+        tk.Button(master,text='/',font='sans-serif 16',width=2,justify='center',command=lambda:self.arithmetic('/')).grid(row=6,column=3,sticky='wens')
         tk.Button(master,text='←',font='sans-serif 16',width=2,justify='center',command=lambda:self.delete1()).grid(row=2,column=0,sticky='wens')
         tk.Button(master,text='C',font='sans-serif 16',width=2,justify='center',command=lambda:self.deleteAll('C')).grid(row=2,column=1,sticky='wens')
         tk.Button(master,text='CE',font='sans-serif 16',width=2,justify='center',command=lambda:self.deleteAll('CE')).grid(row=2,column=2,sticky='wens')
